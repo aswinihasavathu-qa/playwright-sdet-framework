@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from '../pages/loginPage'
+import { LoginPage } from '../pages/temp'
 import users from '../test-data/users.json'
 
 users.users.forEach((user, index) => {
