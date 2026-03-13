@@ -1,15 +1,19 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
+import { LoginPage } from '../pages/loginPage'
+import users from '../test-data/users.json'
 
-test('Open Google and search Playwright', async ({ page }) => {
+users.users.forEach((user, index) => {
 
-  await page.goto('https://www.google.com');
+test(`Login test ${index + 1} for ${user.username}`, async ({ page }) => {
 
-  await page.locator('textarea[name="q"]').fill('Playwright automation');
+    const login = new LoginPage(page)
 
-  await page.keyboard.press('Enter');
+    await page.goto('https://opensource-demo.orangehrmlive.com')
 
-  await page.waitForTimeout(3000);
+    await login.login(user.username, user.password)
 
-  await expect(page).toHaveTitle(/Playwright/);
+    await expect(page).toHaveURL(/dashboard/)
 
-});
+})
+
+})
